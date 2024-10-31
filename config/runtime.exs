@@ -31,7 +31,7 @@ if config_env() == :prod do
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
   config :toy_app, ToyApp.Repo,
-    # ssl: true,
+     ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
@@ -54,7 +54,8 @@ if config_env() == :prod do
   config :toy_app, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :toy_app, ToyAppWeb.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
+   http: [port: {:system, "PORT"}],  
+  url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
