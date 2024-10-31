@@ -8,6 +8,7 @@ defmodule ToyAppWeb.PageController do
   end
  
   def index(conn, _params) do
-    render(conn, "index.html")
+    users=Accounts.list_users()
+    render(conn, "index.html", users: users)
   end
 end
