@@ -6,7 +6,8 @@ defmodule ToyAppWeb.PageController do
     # so skip the default app layout.
     render(conn, :home, layout: false)
   end
-  def hello(conn,_params) do
-    html(conn,"Hello world")
+ 
+  def index(conn, _params) do
+    render(conn, "index.html")
   end
 end
